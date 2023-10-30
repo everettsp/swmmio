@@ -1,0 +1,427 @@
+
+infiltration_cols:
+  CURVE_NUMBER:
+    - Subcatchment: ''
+    - CurveNum: 80
+    - Conductivity (depreciated): 1.0
+    - DryTime: 1.0
+    - Param4: 1
+    - Param5: 1
+  GREEN_AMPT:
+    - Subcatchment: ''
+    - Suction: 1.0
+    - HydCon: 1.0
+    - IMDmax: 1.0
+    - Param4: 0.0
+    - Param5: 0.0
+  HORTON:
+    - Subcatchment
+    - MaxRate
+    - MinRate
+    - Decay
+    - DryTime
+    - MaxInfil
+  MODIFIED_GREEN_AMPT: 
+    - Subcatchment
+    - Suction
+    - Ksat
+    - IMD
+    - Param4
+    - Param5
+  MODIFIED_HORTON:
+    - Subcatchment
+    - MaxRate
+    - MinRate
+    - Decay
+    - DryTime
+    - MaxInfil
+
+inp_file_objects:
+  TITLE:
+    # NOTE: not sure what the purpose of 'columns' is, and why it's there for some sections and not others
+    # 'keys' for options sort of makes sense, but in that case there are other sections that should also have 'keys' 
+    # just comment out for now, until something goes awry
+    #columns:
+  - blob
+  OPTIONS:
+    #keys:
+  - FLOW_UNITS: 'CMS'
+  - INFILTRATION: 'CURVE_NUMBER'
+  - FLOW_ROUTING: 'KINWAVE'
+  - START_DATE: '01/01/2000'
+  - START_TIME: '00:00:00'
+  - END_DATE: '01/02/2000'
+  - END_TIME: '00:00:00'
+  - REPORT_START_DATE: '01/01/2000'
+  - REPORT_START_TIME: '00:00:00'
+  - SWEEP_START: '01/01'
+  - SWEEP_END: '12/31'
+  - DRY_DAYS: 5
+  - WET_STEP: 00:05:00
+  - DRY_STEP: 00:05:00
+  - ROUTING_STEP: 00:05:00
+  - REPORT_STEP: 00:05:00
+  - RULE_STEP: 00:00:00
+  - ALLOW_PONDING: 'NO'
+  - INERTIAL_DAMPING: 'PARTIAL'
+  - SLOPE_WEIGHTING: 'NO'
+  - VARIABLE_STEP: 0.75
+  - NORMAL_FLOW_LIMITED: 'BOTH'
+  - LENGTHENING_STEP: 0
+  - MIN_SURFAREA: 0.1
+  - COMPATIBILITY: ''
+  - SKIP_STEADY_STATE: 'No'
+  - TEMPDIR: ''
+  - IGNORE_RAINFALL: 'No'
+  - FORCE_MAIN_EQUATION: 'H-W'
+  - LINK_OFFSETS: 'DEPTH'
+  - MIN_SLOPE: 0.1
+  - IGNORE_SNOWMELT: 'No'
+  - IGNORE_GROUNDWATER: 'No'
+  - IGNORE_ROUTING: 'No'
+  - IGNORE_QUALITY: 'No'
+  - MAX_TRIALS: 10
+  - HEAD_TOLERANCE: 0.05
+  - SYS_FLOW_TOL: 5
+  - LAT_FLOW_TOL: 5
+  - IGNORE_RDII: 'No'
+  - MINIMUM_STEP: 0.5
+  - THREADS: 1
+  - SURCHARGE_METHOD: 'EXTRAN'
+  FILES:
+    #columns:
+  - Action: ''
+  - FileType: ''
+  - FileName: ''
+  RAINGAGES:
+    #columns:
+  - Name: ''
+  - RainType: 'INTENSITY'
+  - TimeIntrvl: '00:10'
+  - SnowCatch: 0
+  - DataSource: 'FILE'
+  - DataSourceName: ''
+  - StationID: 'blob'
+  - Units: 'mm'
+
+  EVAPORATION:
+    keys:
+    - Type: ''
+    - Parameters: ''
+  LOSSES:
+    # SeepageRage is new?
+    #columns:
+    - Link: 'blob'
+    - Inlet: 'blob'
+    - Outlet: 'blob'
+    - Average: 'blob'
+    - Flap Gate: 'No'
+    - SeepageRate: 'blob'
+  CONDUITS:
+    - Name: 'blob'
+    - InletNode: 'blob'
+    - OutletNode: 'blob'
+    - Length: 1
+    - Roughness: 0.001
+    - InOffset: 0
+    - OutOffset: 0
+    - InitFlow: 0
+    - MaxFlow: 0
+  INFILTRATION:
+    - Subcatchment: 'blob'
+    - Suction: 1
+    - HydCon: 1
+    - IMDmax: 1
+  AQUIFERS:
+    - Name
+    - Por
+    - WP
+    - FC
+    - Ksat
+    - Kslope
+    - Tslope
+    - ETu
+    - ETs
+    - Seep
+    - Ebot
+    - Egw
+    - Umc
+    - ETupat
+  GROUNDWATER:
+    - Subcatchment
+    - Aquifer
+    - Node
+    - Esurf
+    - A1
+    - B1
+    - A2
+    - B2
+    - A3
+    - Dsw
+    - Egwt
+    - Ebot
+    - Wgr
+    - Umc
+  JUNCTIONS:
+    - Name: 'blob'
+    - InvertElev: 0
+    - MaxDepth: 0
+    - InitDepth: 0
+    - SurchargeDepth: 0
+    - PondedArea: 0
+  PATTERNS:
+    - Name: 'blob'
+    - Type: 'DAILY'
+    - Multipliers: 1.0
+  DWF:
+    #columns:
+  - Node: 'blob'
+  - Parameter: 'FLOW'
+  - AverageValue: 0
+  - TimePatterns: '""'
+  RDII:
+    - Node
+    - UnitHydrograph
+    - SewerArea]
+  HYDROGRAPHS:
+    - Hydrograph
+    - RainGage/Month
+    - Response
+    - R
+    - T
+    - K
+    - Dmax
+    - Drecov
+    - Dinit
+  LANDUSES:
+    - Name
+    - CleaningInterval
+    - FractionAvailable
+    - LastCleaned
+  BUILDUP:
+    - LandUse
+    - Pollutant
+    - Function
+    - Coeff1
+    - Coeff2
+    - Coeff3
+    - Normalizer
+  WASHOFF:
+    - LandUse
+    - Pollutant
+    - Function
+    - Coeff1
+    - Coeff2
+    - CleaningEffic
+    - BMPEffic
+  COVERAGES:
+    - Subcatchment
+    - LandUse
+    - Percent
+  LOADINGS:
+    - Subcatchment
+    - Pollutant
+    - Loading
+  ORIFICES:
+    #columns:
+  - Name
+  - InletNode
+  - OutletNode
+  - OrificeType
+  - CrestHeight
+  - DischCoeff
+  - FlapGate
+  - OpenCloseTime
+  OUTFALLS:
+    - Name: 'blob'
+    - InvertElev: 0
+    - OutfallType: 'FREE'
+    - StageOrTimeseries: ''
+    - TideGate: 'No'
+    - RouteTo: ''
+  OUTLETS:
+    - Name
+    - InletNode
+    - OutletNode
+    - OutflowHeight
+    - OutletType
+    - Qcoeff/QTable
+    - Qexpon
+    - FlapGate
+  PUMPS:
+    - Name
+    - InletNode
+    - OutletNode
+    - PumpCurve
+    - InitStatus
+    - Depth
+    - ShutoffDepth
+  STORAGE:
+    - Name
+    - InvertElev
+    - MaxD
+    - InitDepth
+    - StorageCurve
+    - Coefficient
+    - Exponent,
+    - Constant
+    - PondedArea
+    - EvapFrac
+    - SuctionHead
+    - Conductivity
+    - InitialDeficit
+  DIVIDERS:
+    - Name
+    - Elevation
+    - Diverted Link
+    - Type
+    - Parameters
+  SUBCATCHMENTS:
+    - Name: 'blob'
+    - Raingage: 'blob'
+    - Outlet: 'blob'
+    - Area: 10
+    - PercImperv: 0
+    - Width: 316
+    - PercSlope: 0.5
+    - CurbLength: 0
+    - SnowPack: ''
+  SUBAREAS:
+    - Name: 'blob'
+    - N-Imperv: 0.01
+    - N-Perv: 0.01
+    - S-Imperv: 0
+    - S-Perv: 0
+    - PctZero: 25
+    - RouteTo: 'OUTLET'
+    - PctRouted: ''
+  WEIRS:
+    - Name
+    - InletNode
+    - OutletNode
+    - WeirType
+    - CrestHeight
+    - DischCoeff
+    - FlapGate
+    - EndCon
+    - EndCoeff,
+    - Surcharge
+    - RoadWidth
+    - RoadSurf
+  XSECTIONS:
+    - Link: 'blob'
+    - Shape: 'CIRCULAR'
+    - Geom1: 1
+    - Geom2: 0
+    - Geom3: 0
+    - Geom4: 0
+    - Barrels: 1
+    - XX: 0
+  POLLUTANTS:
+    - Name
+    - MassUnits
+    - RainConcen
+    - GWConcen
+    - I&IConcen
+    - DecayCoeff
+    - SnowOnly,
+    - CoPollutName
+    - CoPollutFraction
+    - DWFConcen
+    - InitConcen
+  INFLOWS:
+    - Node: 'blob'
+    - Constituent: 'FLOW'
+    - Time Series: '""'
+    - Type: 'FLOW'
+    - Mfactor: 1.0
+    - Sfactor: 1.0
+    - Baseline: 0
+    - Pattern: 'blob'
+  LID_USAGE:
+    - Subcatchment
+    - LID_Process
+    - Number
+    - Area
+    - Width
+    - InitSat
+    - FromImp
+    - ToPerv
+    - RptFile
+    - DrainTo
+    - FromPerv
+  TIMESERIES:
+    - Name
+    - Date
+    - Time
+    - Value
+  COORDINATES:
+    - Name
+    - X
+    - Y
+  VERTICES:
+    - Name
+    - X
+    - Y
+  Polygons:
+    - Name
+    - X
+    - Y
+  POLYGONS:
+    - Name
+    - X
+    - Y
+  MAP:
+    - Param
+    - x1
+    - y1
+    - x2
+    - y2
+  REPORT:
+    - INPUT: 'YES'
+    - SUBCATCHMENTS: 'ALL'
+    - NODES: 'ALL'
+    - LINKS: 'ALL'
+
+
+  TAGS:
+    - ElementType
+    - Name
+    - Tag
+  ADJUSTMENTS:
+    - blob
+  CURVES:
+    - Name
+    - Type
+    - X-Value
+    - Y-Value
+  STREETS:
+    - Name
+    - Tcrown
+    - Hcurb
+    - Sx
+    - nRoad
+    - a
+    - W
+    - Sides
+    - Tback
+    - Sback
+    - nBack
+  INLETS:
+    - Name
+    - Type
+    - Param1
+    - Param2
+    - Param3
+    - Param4
+    - Param5]
+  INLET_USAGE:
+    - Link
+    - Inlet
+    - Node
+    - Number
+    - "%Clogged"
+    - Qmax
+    - aLocal
+    - wLocal
+    - Placement

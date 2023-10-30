@@ -13,15 +13,16 @@ inp_file_objects:
     keys: [FLOW_UNITS, INFILTRATION, FLOW_ROUTING, START_DATE, START_TIME,
     END_DATE, END_TIME, REPORT_START_DATE, REPORT_START_TIME, SWEEP_START, SWEEP_END,
     DRY_DAYS, WET_STEP, DRY_STEP, ROUTING_STEP, REPORT_STEP, RULE_STEP, ALLOW_PONDING,
-    INERTIAL_DAMPING, SLOPE_WEIGHTING, VARIABLE_STEP, NORMAL_FLOW_LIMITED, LENGTHENING_STEP,
+    INERTIAL_DAMPING, VARIABLE_STEP, NORMAL_FLOW_LIMITED, LENGTHENING_STEP,
     MIN_SURFAREA, COMPATIBILITY, SKIP_STEADY_STATE, TEMPDIR, IGNORE_RAINFALL, FORCE_MAIN_EQUATION,
     LINK_OFFSETS, MIN_SLOPE, IGNORE_SNOWMELT, IGNORE_GROUNDWATER, IGNORE_ROUTING, IGNORE_QUALITY,
     MAX_TRIALS, HEAD_TOLERANCE, SYS_FLOW_TOL, LAT_FLOW_TOL, IGNORE_RDII, MINIMUM_STEP,
-    THREADS, SURCHARGE_METHOD]
+    THREADS, SURCHARGE_METHOD] 
+    #removed: SLOPE_WEIGHTING
   FILES:
     columns: [Action, FileType, FileName]
   RAINGAGES:
-    columns: [Name, RainType, TimeIntrvl, SnowCatch, DataSource, DataSourceName]
+    columns: [Name, RainType, TimeIntrvl, SnowCatch, DataSource, DataSourceName, StationID, Units]
   EVAPORATION:
     keys: [Type, Parameters]
   LOSSES:
@@ -32,12 +33,13 @@ inp_file_objects:
       - Outlet
       - Average
       - Flap Gate
-      - SeepageRate
+      - SeepageRate 
   CONDUITS: [Name, InletNode, OutletNode, Length, Roughness, InOffset, OutOffset, InitFlow, MaxFlow]
   INFILTRATION: [Subcatchment, Suction, HydCon, IMDmax]
   AQUIFERS: [Name, Por, WP, FC, Ksat, Kslope, Tslope, ETu, ETs, Seep, Ebot, Egw, Umc, ETupat]
   GROUNDWATER: [Subcatchment, Aquifer, Node, Esurf, A1, B1, A2, B2, A3, Dsw, Egwt, Ebot, Wgr, Umc]
   JUNCTIONS: [Name, InvertElev, MaxDepth, InitDepth, SurchargeDepth, PondedArea]
+  PATTERNS: [Name, Type, Multipliers]
   DWF:
     columns: [Node, Parameter, AverageValue, TimePatterns]
   RDII: [Node, UnitHydrograph, SewerArea]
@@ -71,7 +73,8 @@ inp_file_objects:
   Polygons: [Name, X, Y]
   POLYGONS: [Name, X, Y]
   MAP: [Param, x1, y1, x2, y2]
-  REPORT: [Param, Status]
+  REPORT:
+    keys: [INPUT, SUBCATCHMENTS, NODES, LINKS]
   TAGS: [ElementType, Name, Tag]
   ADJUSTMENTS: [blob]
   CURVES: [Name, Type, X-Value, Y-Value]

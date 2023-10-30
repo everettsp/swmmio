@@ -34,9 +34,16 @@ rpt_sections:
   Link Results:
     - Date
     - Time
-    - FlowCFS
-    - VelocityFPS
-    - DepthFt
+    - FlowCMS
+    - VelocityMPS
+    - DepthM
+    - PercentFull
+  Link Time Series Results:
+    - Date
+    - Time
+    - FlowCMS
+    - VelocityMPS
+    - DepthM
     - PercentFull
   Link Summary:
     - Name
@@ -77,10 +84,20 @@ rpt_sections:
   Node Results:
     - Date
     - Time
-    - InflowCFS
-    - FloodingCFS
-    - DepthFt
-    - HeadFt
+    - InflowCMS
+    - FloodingCMS
+    - DepthM
+    - HeadM
+    - TSS
+    - TP
+    - TN
+  Node Time Series Results:
+    - Date
+    - Time
+    - InflowCMS
+    - FloodingCMS
+    - DepthM
+    - HeadM
     - TSS
     - TP
     - TN
@@ -111,23 +128,23 @@ rpt_sections:
   Subcatchment Results:
     - Date
     - Time
-    - PrecipInchPerHour
-    - LossesInchPerHr
-    - RunoffCFS
+    - PrecipMMPerHour
+    - LossesMMPerHr
+    - RunoffCMS
   Subcatchment Time Series Results:
     - Date
     - Time
     - PrecipMMPerHour
-    - LossesInchPerHr
-    - RunoffCFS
+    - LossesMMPerHr
+    - RunoffCMS
   Subcatchment Runoff Summary:
     - Name
     - TotalPrecip
     - TotalRunon
     - TotalEvap
     - TotalInfil
-    - TotalRunoffIn
-    - TotalRunoffMG
+    - TotalRunoffMM
+    - TotalRunoffM3
     - PeakRunoff
     - RunoffCoeff
   Subcatchment Summary:
@@ -150,8 +167,8 @@ swmm5_version:
         - TotalInfil
         - ImpervRunoff
         - PervRunoff
-        - TotalRunoffIn
-        - TotalRunoffMG
+        - TotalRunoffMM
+        - TotalRunoffM3
         - PeakRunoff
         - RunoffCoeff
         
