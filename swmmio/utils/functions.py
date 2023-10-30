@@ -3,6 +3,7 @@ import pandas as pd
 import networkx as nx
 
 from swmmio.utils import error
+from swmmio.defs import DEFAULT_VALS, INP_OBJECTS, INFILTRATION_COLS
 
 
 def random_alphanumeric(n=6):
@@ -10,6 +11,51 @@ def random_alphanumeric(n=6):
     chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
     return ''.join(random.choice(chars) for i in range(n))
 
+def assign_default_parameter_values(df, section):
+    if section.upper() in ['CURVE_NUMBER','GREEN_AMPT','HORTON','MODIFIED_GREEN_AMPT','MODIFIED_HORTON']:
+        vals = DEFAULT_VALS['infiltration_cols'][section.upper()]
+    else:
+        vals = DEFAULT_VALS['inp_file_objects'][section.upper()]
+    # convert list of dicts to dict
+    # TODO: just fix the yaml file
+    default_values = dict(pair for d in vals for pair in d.items())
+
+    for col in df.columns:
+        if df[col].isnull().all():
+            if col in list(default_values.keys()):
+                df[col] = default_values[col]
+    return df
+
+def dataframe_to_dat(filename, gauge_dict:dict[str:pd.DataFrame]):
+    with open(filename, "w") as f:
+        f.write("automaticaly generate dat file, format: Station|Year|Month|Day|Hour|Minute|Precipitation\n")
+        for key in gauge_dict:
+            df = gauge_dict[key]
+            for dt, row in df.iterrows():
+                line = '{id:s}\t{year:04}\t{month:02d}\t{day:02d}\t{hour:02d}\t{minute:02d}\t{value:08f}'.format(id=key, year=dt.year, month=dt.month ,day=dt.day, hour=dt.hour, minute=dt.minute, value=row['precip'])
+                f.write(line+"\n")
+
+def summarize_model(model):
+    model_summary = dict()
+
+    # numbers of elements
+    model_summary['num_subcatchments'] = len(model.inp.subcatchments)
+    model_summary['num_conduits'] = len(model.inp.conduits)
+    model_summary['num_junctions'] = len(model.inp.juntions)
+    model_summary['num_outfalls'] = len(model.inp.outfalls)
+    model_summary['num_raingages'] = len(model.inp.raingages)
+
+    # calculated values - only calculate if elements exist
+    if len(model.inp.subcatchments) != 0:
+        model_summary['catchment_area'] = model.inp.subcatchments.Area.sum()
+        model_summary['mean_subcatchment_slope'] = ((model.inp.subcatchments.Area / model.inp.subcatchments.Area.sum()) * model.inp.subcatchments.PercSlope).sum()
+    
+    if len(model.inp.conduits) != 0:
+        model_summary['total_conduit_length'] = model.inp.conduits.Length.sum()
+    
+    if len(model.nodes.dataframe) != 0:
+        model_summary['invert_range'] = model.nodes().InvertElev.max() - model.nodes().InvertElev.min()
+    return model_summary
 
 def model_to_networkx(model, drop_cycles=True):
     '''
