@@ -4,7 +4,6 @@ import os
 import pandas as pd
 from pathlib import Path
 
-
 from swmmio import Model
 from swmmio.defs.config import PYTHON_EXE_PATH, PYSWMM_WRAPPER_PATH
 
@@ -26,20 +25,7 @@ def run_simple(inp_path, py_path=PYTHON_EXE_PATH, pyswmm_wrapper=PYSWMM_WRAPPER_
                     env=env_definition)
     return 0
 
-
-
-def run_simple_workaround(inp_path):
-    p = Path("C:\Program Files")
-    swmm_path = [child for child in p.iterdir() if 'EPA SWMM' in str(child)][0]
-    swmm_exe = str(Path(swmm_path) / 'runswmm.exe')
-    rpt_path = os.path.splitext(inp_path)[0] + '.rpt'
-    out_path = os.path.splitext(inp_path)[0] + '.out'
-    command = '"{}" "{}" "{}" "{}"'.format(swmm_exe, inp_path, rpt_path, out_path)
-    subprocess.run(command)
-
-
 def run_hot_start_sequence(inp_path, py_path=PYTHON_EXE_PATH, pyswmm_wrapper=PYSWMM_WRAPPER_PATH):
-
     model = Model(inp_path)
     hotstart1 = os.path.join(model.inp.dir, model.inp.name + '_hot1.hsf')
     hotstart2 = os.path.join(model.inp.dir, model.inp.name + '_hot2.hsf')
